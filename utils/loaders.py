@@ -62,7 +62,7 @@ class DataLoader():
 
     def load_data(self, domain, batch_size=1, is_testing=False):
         data_type = "train%s" % domain if not is_testing else "test%s" % domain
-        path = glob('./data/%s/%s/*' % (self.dataset_name, data_type))
+        path = glob('data/%s/%s/*' % (self.dataset_name, data_type))
 
         batch_images = np.random.choice(path, size=batch_size)
 
@@ -84,8 +84,8 @@ class DataLoader():
 
     def load_batch(self, batch_size=1, is_testing=False):
         data_type = "train" if not is_testing else "val"
-        path_A = glob('./data/%s/%sA/*' % (self.dataset_name, data_type))
-        path_B = glob('./data/%s/%sB/*' % (self.dataset_name, data_type))
+        path_A = glob('data/%s/%sA/*' % (self.dataset_name, data_type))
+        path_B = glob('data/%s/%sB/*' % (self.dataset_name, data_type))
 
         self.n_batches = int(min(len(path_A), len(path_B)) / batch_size)
         total_samples = self.n_batches * batch_size
@@ -164,7 +164,7 @@ def load_mnist_gan():
 
 
 
-def load_fashion_mnist(input_rows, input_cols, path='./data/fashion/fashion-mnist_train.csv'):
+def load_fashion_mnist(input_rows, input_cols, path='data/fashion/fashion-mnist_train.csv'):
     #read the csv data
     df = pd.read_csv(path)
     #extract the image pixels
@@ -179,7 +179,7 @@ def load_fashion_mnist(input_rows, input_cols, path='./data/fashion/fashion-mnis
 
 def load_safari(folder):
 
-    mypath = os.path.join("./data", folder)
+    mypath = os.path.join("data", folder)
     txt_name_list = []
     for (dirpath, dirnames, filenames) in walk(mypath):
         for f in filenames:
@@ -236,7 +236,7 @@ def load_cifar(label, num):
 
 
 def load_celeb(data_name, image_size, batch_size):
-    data_folder = os.path.join("./data", data_name)
+    data_folder = os.path.join("data", data_name)
 
     data_gen = ImageDataGenerator(preprocessing_function=lambda x: (x.astype('float32') - 127.5) / 127.5)
 
@@ -253,7 +253,7 @@ def load_celeb(data_name, image_size, batch_size):
 from functools import partial
 
 def load_music(data_name, filename, n_bars, n_steps_per_bar):
-    file = os.path.join("./data", data_name, filename)
+    file = os.path.join("data", data_name, filename)
 
     with np.load(file, encoding='bytes',allow_pickle=True) as f:
         print(f)
@@ -307,7 +307,7 @@ def load_music(data_name, filename, n_bars, n_steps_per_bar):
 
 def preprocess_image(data_name, file, img_nrows, img_ncols):
 
-    image_path = os.path.join('./data', data_name, file)
+    image_path = os.path.join('data', data_name, file)
 
     img = load_img(image_path, target_size=(img_nrows, img_ncols))
     img = img_to_array(img)
